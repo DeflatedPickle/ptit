@@ -1,16 +1,13 @@
 mod imagecrop;
 
 pub mod ptit {
-    use std::cmp;
-    use std::io::{stdout, Write};
-    use std::thread::sleep;
-    use std::time::Duration;
     use bytes::Bytes;
-    use image::{DynamicImage, GenericImage, GenericImageView, ImageError, Rgba};
+    use image::{DynamicImage, GenericImageView, ImageError, Rgba};
     use image::imageops::FilterType;
     use reqwest;
     use rgb2ansi256::rgb_to_ansi256;
     use termsize::Size;
+
     use crate::imagecrop::ImageCrop;
 
     pub fn download(website: &str) -> Result<reqwest::Result<Bytes>, reqwest::Error> {
@@ -33,8 +30,8 @@ pub mod ptit {
             Some(t) => t
         };
 
-        let width = size.cols as u32 / 2;
-        let height = size.rows as u32;
+        let width = size.cols as u32 / 2 - 1;
+        let height = size.rows as u32 - 1;
 
         return image.resize(
             round(width, 2),
@@ -55,23 +52,28 @@ pub mod ptit {
         );
     }
 
-    pub fn scan(mut image: DynamicImage) {
+    pub fn scan(image: DynamicImage, solid: bool) {
         for y in 0..image.height() {
             for x in 0..image.width() {
-                convert(image.get_pixel(x, y));
+                convert(image.get_pixel(x, y), solid);
             }
             println!()
         }
     }
 
-    pub fn convert(rgba: Rgba<u8>) {
-        let char = match rgba.0[3] {
-            0 => ' ',
-            1..=64 => '░',
-            65..=128 => '▒',
-            129..=192 => '▓',
-            193..=255 => '█',
-            _ => '?'
+    pub fn convert(rgba: Rgba<u8>, solid: bool) {
+        #[allow(unreachable_patterns)]
+        let char = if solid {
+            '█'
+        } else {
+            match rgba.0[3] {
+                0 => ' ',
+                1..=64 => '░',
+                65..=128 => '▒',
+                129..=192 => '▓',
+                193..=255 => '█',
+                _ => '?'
+            }
         };
 
         for _ in 0..2 {

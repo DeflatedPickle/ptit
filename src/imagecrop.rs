@@ -1,13 +1,10 @@
 // Modified from: https://github.com/ritiek/auto-image-cropper/blob/master/src/main.rs
 
 use image::{
-    GenericImageView,
     DynamicImage,
+    GenericImageView,
     Rgba,
-    ImageResult,
 };
-
-use std::path::Path;
 
 pub struct Point {
     pub x: u32,
@@ -19,12 +16,6 @@ pub struct ImageCrop {
 }
 
 impl ImageCrop {
-    pub fn open(file: DynamicImage) -> ImageResult<ImageCrop> {
-        Ok(ImageCrop {
-            img: file,
-        })
-    }
-
     pub fn calculate_corners(&self) -> (Point, Point) {
         (self.top_left_corner(), self.bottom_right_corner())
     }
