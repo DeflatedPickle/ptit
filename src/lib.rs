@@ -30,7 +30,7 @@ pub mod ptit {
             Some(t) => t
         };
 
-        let width = size.cols as u32 / 2 - 1;
+        let width = (size.cols as u32 - 1) / 2 ;
         let height = size.rows as u32 - 1;
 
         return image.resize(
