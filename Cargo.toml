@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = [
     "DeflatedPickle"
 ]
+description = "Converts an image to block characters"
 edition = "2021"
 repository = "https://github.com/DeflatedPickle/ptit"
 license = "MIT"

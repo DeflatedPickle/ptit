@@ -1,6 +1,13 @@
 # ptit
 A CLI for turning images ~~or videos~~ into block text elements to view in the terminal
 
+## Installation
+### Cargo
+> Requires a Rust install
+```shell
+cargo install ptit
+```
+
 ## Usage
 ### URL
 ##### Input
