@@ -14,7 +14,7 @@ cargo install ptit
 ### URL
 ##### Input
 ```shell
-cargo run -- -cr url "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+ptit -cr url "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
 ```
 ##### Output
 [![](.github/image/ditto.png)]
@@ -22,7 +22,7 @@ cargo run -- -cr url "https://raw.githubusercontent.com/PokeAPI/sprites/master/s
 ### File
 ##### Input
 ```shell
-cargo run -- -cr file "~/Downloads/63.png"
+ptit -cr file "~/Downloads/63.png"
 ```
 [![](.github/image/abra.png)]
 
